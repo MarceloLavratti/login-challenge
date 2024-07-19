@@ -19,6 +19,7 @@ export default function LoginForm() {
   const [btnEnable, setBtnEnable] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
 
   const handleInputChange = (e) => {
 
@@ -37,14 +38,33 @@ export default function LoginForm() {
     } else {
       setBtnEnable(false)
     }
-  }, [email, password])
+  }, [email, password])  
+
+  const handleBtnLogin = async () => {
+
+    setBtnEnable(false)
+    if(isVisible){
+      setIsVisible(false)
+    }
+
+    try {
+      await login({ email, password })
+      alert('Login successfull')
+    } catch (error) {
+      setIsVisible(true)
+    } finally {
+      setBtnEnable(true)
+    }
+  }
 
   return (
     <div className='wrapper'>
       <div className='login-form'>
         <h1>Login Form 🐞</h1>
         {/* Coloque a mensagem de erro de login na div abaixo. Mostre a div somente se houver uma mensagem de erro. */}
-        <div className='errorMessage'></div>
+        {isVisible && (
+          <div className='errorMessage'>Falha no login, tente novamente</div>
+        )}        
         <div className='row'>
           <label htmlFor={'email'}>Email</label>
           <input id={'email'} type={'email'} autoComplete='off' onChange={handleInputChange} />
@@ -55,7 +75,7 @@ export default function LoginForm() {
         </div>
 
         <div className='button'>
-          <button disabled={!btnEnable}>Login</button>
+          <button disabled={!btnEnable} onClick={handleBtnLogin}>Login</button>
         </div>
       </div>
     </div>
