@@ -1,11 +1,11 @@
 import { login } from './utils';
 import './index.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Instruções:
 // * Você tem um formulário de login INCOMPLETO
 // * Não é permitido adicionar novos elementos HTML
-// * Não é permitido usar refs
+// * Não é permitido usar refs para controlar os inputs(useRef)
 //
 // Tarefas:
 // todo - O botão de login deve disparar a função login(), importada no topo deste arquivo, e passar os dados necessários.
@@ -15,6 +15,30 @@ import { useState } from 'react';
 // todo - Mostre um alerta caso o login seja efetuado com sucesso (javascript alert). Investigue a função login() para entender como ter sucesso na requisição.
 
 export default function LoginForm() {
+
+  const [btnEnable, setBtnEnable] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleInputChange = (e) => {
+
+    const { id, value } = e.target
+
+    if (id === 'email') {
+      setEmail(value)
+    } else if (id === 'password') {
+      setPassword(value)
+    }
+  }
+
+  useEffect(() => {
+    if (email.trim() !== '' && password.length >= 6) {
+      setBtnEnable(true)
+    } else {
+      setBtnEnable(false)
+    }
+  }, [email, password])
+
   return (
     <div className='wrapper'>
       <div className='login-form'>
@@ -23,15 +47,15 @@ export default function LoginForm() {
         <div className='errorMessage'></div>
         <div className='row'>
           <label htmlFor={'email'}>Email</label>
-          <input id={'email'} type={'email'} autoComplete='off' />
+          <input id={'email'} type={'email'} autoComplete='off' onChange={handleInputChange} />
         </div>
         <div className='row'>
           <label htmlFor={'password'}>Password</label>
-          <input id={'password'} type={'password'} />
+          <input id={'password'} type={'password'} onChange={handleInputChange} />
         </div>
 
         <div className='button'>
-          <button>Login</button>
+          <button disabled={!btnEnable}>Login</button>
         </div>
       </div>
     </div>
