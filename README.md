@@ -10,3 +10,6 @@ todo - Desabilite o botão de Login caso o e-mail esteja em branco OU a senha fo
 todo - Desabilite o botão de Login equanto você está executando o login.<br>
 todo - Mostre uma mensagem de erro de login() caso o Login falhe. A mensagem deve ser limpa a cada nova tentativa de Login.<br>
 todo - Mostre um alerta caso o login seja efetuado com sucesso (javascript alert). Investigue a função login() para entender como ter sucesso na requisição.
+
+![image](https://github.com/user-attachments/assets/35bf34d0-3cc6-481c-9eb7-9ee5ca7624d3)
+
