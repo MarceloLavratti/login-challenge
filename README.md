@@ -1,6 +1,6 @@
 Solução de um desafio de Login em React, com as seguintes instruções:
 
-Você tem um formulário de login INCOMPLETO
+Você tem um formulário de login INCOMPLETO<br>
 Não é permitido adicionar novos elementos HTML
 Não é permitido usar refs para controlar os inputs(useRef)
 
